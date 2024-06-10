@@ -1,8 +1,9 @@
 #include <signal.h>
 #include <stdio.h>
-#include <unistd.h>
 #include <stdlib.h>
-//printfをft_printfに変える
+#include <unistd.h>
+
+// printfをft_printfに変える
 
 void	handle_signal(int sig)
 {
