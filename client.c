@@ -6,7 +6,7 @@
 /*   By: sasakiyuto <sasakiyuto@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 21:32:56 by sasakiyuto        #+#    #+#             */
-/*   Updated: 2024/10/18 22:14:06 by sasakiyuto       ###   ########.fr       */
+/*   Updated: 2024/10/18 23:08:20 by sasakiyuto       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,14 @@
 #include <stdlib.h>
 #include <unistd.h>
 
-void	send_char(int pid, char *str)
+void	send_char(int pid, char c)
 {
 	int	i;
 
 	i = 0;
 	while (i < 8)
 	{
-		if ((str[i] >> i))
+		if (c & (1 << i))
 		{
 			if (kill(pid, SIGUSR1) == -1)
 			{
@@ -58,7 +58,9 @@ int	main(int argc, char **argv)
 	pid = atoi(argv[1]);
 	while (*message)
 	{
-		send_char(pid, message);
+		send_char(pid, *message);
 		message++;
 	}
+	send_char(pid, '\0');
+	return (0);
 }
