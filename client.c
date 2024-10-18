@@ -6,7 +6,7 @@
 /*   By: sasakiyuto <sasakiyuto@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 21:32:56 by sasakiyuto        #+#    #+#             */
-/*   Updated: 2024/10/17 21:32:57 by sasakiyuto       ###   ########.fr       */
+/*   Updated: 2024/10/18 22:14:06 by sasakiyuto       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	send_char(int pid, char *str)
 		}
 		else
 		{
-			if (kill(pid, SIGUSER2) == -1)
+			if (kill(pid, SIGUSR2) == -1)
 			{
 				perror("kill");
 				exit(EXIT_FAILURE);
