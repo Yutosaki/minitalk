@@ -6,7 +6,7 @@
 /*   By: sasakiyuto <sasakiyuto@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 21:32:53 by sasakiyuto        #+#    #+#             */
-/*   Updated: 2024/10/18 23:10:47 by sasakiyuto       ###   ########.fr       */
+/*   Updated: 2024/10/20 14:58:02 by sasakiyuto       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,25 +17,20 @@
 
 // printfをft_printfに変える
 
-struct s_data
-{
-    int bit_count;
-    char current_char;
-};
-
-struct s_data g_data = {0, 0};
-
 void handle_signal(int sig)
 {
+	static int bit_count = 0;
+	static char current_char = 0;
+	
     if (sig == SIGUSR1)
-        g_data.current_char |= (1 << g_data.bit_count); 
-    g_data.bit_count++;
+        current_char |= (1 << bit_count); 
+    bit_count++;
     
-    if (g_data.bit_count == 8)
+    if (bit_count == 8)
     {
-        write(1, &g_data.current_char, 1);
-        g_data.bit_count = 0;
-        g_data.current_char = 0;
+        write(1, &current_char, 1);
+        bit_count = 0;
+        current_char = 0;
     }
 }
 
