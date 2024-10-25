@@ -3,7 +3,7 @@ CLIENT = client
 NAME = $(SERVER) $(CLIENT)
 
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -I./ft_printf
+CFLAGS = -Wall -Wextra -Werror -I./ft_printf -I./libft
 
 SRCS_SERVER = server.c
 SRCS_CLIENT = client.c
@@ -18,16 +18,19 @@ $(SERVER): $(OBJS_SERVER)
 	$(CC) $(CFLAGS) -o $(SERVER) $(OBJS_SERVER) ft_printf/libftprintf.a
 
 $(CLIENT): $(OBJS_CLIENT)
-	@make -C "ft_printf"
-	$(CC) $(CFLAGS) -o $(CLIENT) $(OBJS_CLIENT) ft_printf/libftprintf.a
+	@make -C "ft_printf" >/dev/null
+	@make -C "libft" >/dev/null
+	$(CC) $(CFLAGS) -o $(CLIENT) $(OBJS_CLIENT) ft_printf/libftprintf.a libft/libft.a
 
 clean:
 	rm -f $(OBJS_CLIENT) $(OBJS_SERVER) 
-	@make -C "ft_printf" clean
+	@make -C "ft_printf" clean >/dev/null
+	@make -C "libft" clean >/dev/null
 
 fclean: clean
 	rm -f $(SERVER) $(CLIENT)
-	@make -C "ft_printf" fclean
+	@make -C "ft_printf" fclean >/dev/null
+	@make -C "libft" fclean >/dev/null
 
 re: fclean all
 
