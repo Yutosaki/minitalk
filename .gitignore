@@ -3,3 +3,5 @@ a.out
 *.o
 client
 server
+../ft_printf/*.o
+../ft_printf/*.a
