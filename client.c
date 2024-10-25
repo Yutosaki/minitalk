@@ -6,12 +6,13 @@
 /*   By: sasakiyuto <sasakiyuto@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 21:32:56 by sasakiyuto        #+#    #+#             */
-/*   Updated: 2024/10/25 22:34:17 by sasakiyuto       ###   ########.fr       */
+/*   Updated: 2024/10/25 23:06:06 by sasakiyuto       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 // serverに文字列とサーバーのPIDを送信する
 #include "ft_printf.h"
+#include "libft.h"
 #include <signal.h>
 #include <stdio.h>
 #include <stdlib.h>
