@@ -6,15 +6,18 @@
 /*   By: sasakiyuto <sasakiyuto@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 21:32:56 by sasakiyuto        #+#    #+#             */
-/*   Updated: 2024/10/18 23:08:20 by sasakiyuto       ###   ########.fr       */
+/*   Updated: 2024/10/25 22:34:17 by sasakiyuto       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 // serverに文字列とサーバーのPIDを送信する
+#include "ft_printf.h"
 #include <signal.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
+
+// atoi をft_atoiに
 
 void	send_char(int pid, char c)
 {
@@ -51,7 +54,7 @@ int	main(int argc, char **argv)
 
 	if (argc != 3)
 	{
-		printf("Usage: %s <pid> <string>\n", argv[0]);
+		ft_printf("Usage: %s <pid> <string>\n", argv[0]);
 		return (1);
 	}
 	message = argv[2];
