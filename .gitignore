@@ -7,3 +7,4 @@ ft_printf/*.o
 ft_printf/*.a
 libft/*.o
 libft/*.a
+.vscode
