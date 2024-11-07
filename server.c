@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   server.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sasakiyuto <sasakiyuto@student.42.fr>      +#+  +:+       +#+        */
+/*   By: yutsasak <yutsasak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 21:32:53 by sasakiyuto        #+#    #+#             */
-/*   Updated: 2024/11/03 20:05:29 by sasakiyuto       ###   ########.fr       */
+/*   Updated: 2024/11/07 21:41:51 by yutsasak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,15 +27,6 @@ void	handle_signal(int sig)
 	if (bit_count == 8)
 	{
 		write(1, &current_char, 1);
-		ssize_t bytes_written = write(1, &current_char, 1);
-        if (bytes_written == -1) {
-            perror("write");
-            exit(EXIT_FAILURE);
-        } else if (bytes_written != 1) {
-			ft_printf("bytes_written = %ld\n", bytes_written); // もっと詳しくエラーを表示する
-            perror("write");
-            exit(EXIT_FAILURE);
-        }
 		bit_count = 0;
 		current_char = 0;
 	}
