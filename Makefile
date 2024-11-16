@@ -11,8 +11,8 @@ CFLAGS = -Wall -Wextra -Werror -I./ft_printf -I./libft
 SRCS_SERVER = src/server.c
 SRCS_CLIENT = src/client.c
 
-SRCS_BONUS_SERVER = src/server.c
-SRCS_BONUS_CLIENT = src/client.c
+SRCS_BONUS_SERVER = src_bonus/server_bonus.c
+SRCS_BONUS_CLIENT = src_bonus/client_bonus.c
 
 OBJS_SERVER = $(SRCS_SERVER:.c=.o)
 OBJS_CLIENT = $(SRCS_CLIENT:.c=.o)
