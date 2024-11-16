@@ -6,7 +6,7 @@
 /*   By: yutsasak <yutsasak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 21:32:53 by sasakiyuto        #+#    #+#             */
-/*   Updated: 2024/11/13 20:49:14 by yutsasak         ###   ########.fr       */
+/*   Updated: 2024/11/16 17:20:32 by yutsasak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,12 @@
 #include <stdlib.h>
 #include <unistd.h>
 
-volatile sig_atomic_t	g_received = 0;
-
-void	handle_signal(int sig)
+void	handle_signal(int sig, siginfo_t *info, void *ucontext)
 {
 	static int	bit_count = 0;
 	static char	current_char = 0;
 
+	(void)ucontext;
 	if (sig == SIGUSR1)
 		current_char |= (1 << bit_count);
 	bit_count++;
@@ -31,6 +30,12 @@ void	handle_signal(int sig)
 		write(1, &current_char, 1);
 		bit_count = 0;
 		current_char = 0;
+	}
+	usleep(100);
+	if (kill(info->si_pid, SIGUSR1) == -1)
+	{
+		perror("kill");
+		exit(EXIT_FAILURE);
 	}
 }
 
@@ -41,8 +46,8 @@ int	main(void)
 
 	pid = getpid();
 	ft_printf("server pid = %d\n", pid);
-	sa.sa_handler = handle_signal;
-	sa.sa_flags = 0;
+	sa.sa_sigaction = handle_signal;
+	sa.sa_flags = SA_SIGINFO;
 	sigemptyset(&sa.sa_mask);
 	if (sigaction(SIGUSR1, &sa, NULL) == -1)
 	{

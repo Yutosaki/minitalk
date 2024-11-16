@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   client.c                                           :+:      :+:    :+:   */
+/*   client_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yutsasak <yutsasak@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sasakiyuto <sasakiyuto@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 21:32:56 by sasakiyuto        #+#    #+#             */
-/*   Updated: 2024/11/16 16:45:04 by yutsasak         ###   ########.fr       */
+/*   Updated: 2024/11/16 17:28:15 by sasakiyuto       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,27 +41,48 @@ void	send_char(int pid, char c)
 			}
 		}
 		i++;
-		usleep(2000);
+		pause();
 	}
+}
+
+void	handle_signal(int sig)
+{
+	(void)sig;
+}
+
+int	set_signal_catching(struct sigaction *sa)
+{
+	sa->sa_handler = handle_signal;
+	sa->sa_flags = 0;
+	sigemptyset(&sa->sa_mask);
+	if (sigaction(SIGUSR1, sa, NULL) == -1)
+	{
+		perror("sigaction");
+		return (EXIT_FAILURE);
+	}
+	return (EXIT_SUCCESS);
 }
 
 int	main(int argc, char **argv)
 {
-	pid_t	pid;
-	char	*message;
+	pid_t				pid;
+	char				*message;
+	struct sigaction	sa;
 
 	if (argc != 3)
 	{
 		ft_printf("Usage: %s <pid> <string>\n", argv[0]);
-		return (1);
+		return (EXIT_FAILURE);
 	}
 	message = argv[2];
-	pid = atoi(argv[1]);
+	pid = ft_atoi(argv[1]);
+	if (set_signal_catching(&sa) == EXIT_FAILURE)
+		return (EXIT_FAILURE);
 	while (*message)
 	{
 		send_char(pid, *message);
 		message++;
 	}
 	send_char(pid, '\0');
-	return (0);
+	return (EXIT_SUCCESS);
 }
