@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   server_bonus.c                                     :+:      :+:    :+:   */
+/*   server.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yutsasak <yutsasak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 21:32:53 by sasakiyuto        #+#    #+#             */
-/*   Updated: 2024/11/16 17:20:32 by yutsasak         ###   ########.fr       */
+/*   Updated: 2024/11/16 17:37:52 by yutsasak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	handle_signal(int sig, siginfo_t *info, void *ucontext)
 		bit_count = 0;
 		current_char = 0;
 	}
-	usleep(100);
+	usleep(1000);
 	if (kill(info->si_pid, SIGUSR1) == -1)
 	{
 		perror("kill");
