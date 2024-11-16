@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   client.c                                           :+:      :+:    :+:   */
+/*   client_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yutsasak <yutsasak@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sasakiyuto <sasakiyuto@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 21:32:56 by sasakiyuto        #+#    #+#             */
-/*   Updated: 2024/11/16 13:23:26 by yutsasak         ###   ########.fr       */
+/*   Updated: 2024/11/16 17:28:15 by sasakiyuto       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,9 +50,9 @@ void	handle_signal(int sig)
 	(void)sig;
 }
 
-int set_signal_catching(struct sigaction *sa)
+int	set_signal_catching(struct sigaction *sa)
 {
-	sa->sa_handler =  handle_signal;
+	sa->sa_handler = handle_signal;
 	sa->sa_flags = 0;
 	sigemptyset(&sa->sa_mask);
 	if (sigaction(SIGUSR1, sa, NULL) == -1)
@@ -65,10 +65,9 @@ int set_signal_catching(struct sigaction *sa)
 
 int	main(int argc, char **argv)
 {
-	pid_t	pid;
-	char	*message;
+	pid_t				pid;
+	char				*message;
 	struct sigaction	sa;
-
 
 	if (argc != 3)
 	{
