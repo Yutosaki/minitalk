@@ -6,7 +6,7 @@
 /*   By: yutsasak <yutsasak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 21:32:53 by sasakiyuto        #+#    #+#             */
-/*   Updated: 2024/11/16 15:12:12 by yutsasak         ###   ########.fr       */
+/*   Updated: 2024/11/16 17:20:32 by yutsasak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,16 +25,17 @@ void	handle_signal(int sig, siginfo_t *info, void *ucontext)
 	if (sig == SIGUSR1)
 		current_char |= (1 << bit_count);
 	bit_count++;
-	if (kill(info->si_pid, SIGUSR1) == -1)
-	{
-		perror("kill");
-		exit(EXIT_FAILURE);
-	}
 	if (bit_count == 8)
 	{
 		write(1, &current_char, 1);
 		bit_count = 0;
 		current_char = 0;
+	}
+	usleep(100);
+	if (kill(info->si_pid, SIGUSR1) == -1)
+	{
+		perror("kill");
+		exit(EXIT_FAILURE);
 	}
 }
 
